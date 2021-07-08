@@ -101,8 +101,8 @@ def StartMainPart():
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.ehlo()
         server.starttls()
-        server.login('rockysingh226004@gmail.com', '****************')
-        server.sendmail('rockysingh226004@gmail.com', to, content)
+        server.login('Your email', '****************')
+        server.sendmail('Your email', to, content)
         server.close()
 
     if __name__ == '__main__':
@@ -157,11 +157,11 @@ def StartMainPart():
                 PythonPath = "C:\\Users\\HOME\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe"
                 os.startfile(PythonPath)
 
-            elif 'send email to sandy' in query:
+            elif 'send email to (name whom you want to send email)' in query:
                 try:
                     speak('What should i say')
                     content = takeCommand()
-                    to = "sandynoddy123@gmail.com"
+                    to = "email of the user whom you want to send mail"
                     sendEmail(to, content)
                     speak("Email has been sent.")
                 except Exception as e:
