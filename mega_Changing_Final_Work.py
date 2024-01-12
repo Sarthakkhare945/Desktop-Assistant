@@ -17,13 +17,12 @@ from tkinter.messagebox import *
 from itertools import count
 import tkinter as tk
 import time
-from tkinter import ttk
-
+import sys
 from PIL import ImageTk, Image
 
 win = tk.Tk()
 
-
+# win.attributes('-fullscreen', True)
 def Startbtn():
     # Button(win,text='Started',bg='red',fg='white').pack()
     Button(win, text='Started', width=20, height=2, bg='black', fg='white', state=DISABLED,
@@ -39,6 +38,7 @@ def Exitbtn():
 def Restartbtn():
     # print('Restart clicked')
     os.execv(sys.executable, ['python'] + sys.argv)
+
 
 
 def StartMainPart():
@@ -120,12 +120,26 @@ def StartMainPart():
                 speak("According to wikipedia")
                 print(results)
                 speak(results)
-
-            elif 'open google' in query:
+                
+            elif 'open browser' in query:
                 webbrowser.open('www.google.com')
+            elif 'google' in query:
+                speak('opening google , just a moment')
+                print('https://www.google.com/search?q=' + query)
+                webbrowser.open('https://www.google.com/search?q=' + query)
+                print('Here is what i found for',query)
 
-            elif 'open youtube' in query:
-                webbrowser.open('www.youtube.com')
+            # elif 'google' in query:
+            #     speak('opening google , just a moment')
+            #     print('https://www.google.com/search?q=' + query)
+            #     webbrowser.open('https://www.google.com/search?q=' + query)
+            #     print('Here is what i found for',query)
+            #     speak('Here is what i found for',query)
+
+            elif 'youtube' in query:
+                print('www.youtube.com/results?search_query=' + query)
+                webbrowser.open('www.youtube.com/results?search_query=' + query)
+                
 
             elif 'open geeks' in query:
                 webbrowser.open('https://www.geeksforgeeks.org/')
@@ -154,7 +168,7 @@ def StartMainPart():
 
 
             elif 'open interpreter' in query:
-                PythonPath = "C:\\Users\\HOME\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe"
+                PythonPath = "C:\\Users\\Lenovo\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe"
                 os.startfile(PythonPath)
 
             elif 'send email to (name whom you want to send email)' in query:
@@ -170,11 +184,16 @@ def StartMainPart():
 
             elif 'quit' in query or 'exit' in query or 'offline' in query:
                 speak('Thank You Sir,See you later')
-                exit()
+                os.exit(1)
 
             elif 'who are you' in query or 'your name' in query or 'call you' in query:
-                speak("My name is zaara,what i can do for you")
+                speak("My name is ,what i can do for you")
                 print("My name is zaara, what i can do for you")
+                
+            elif 'you doing' in query or 'r u doing' in query:
+                print('I am waiting, for your command')
+                speak('I am waiting, for your command')
+
 
 
             elif 'do for me' in query:
@@ -186,7 +205,7 @@ def StartMainPart():
                 speak("hello,sir")
 
 
-            elif 'how are you' in query:
+            elif 'how are you' in query or 'how r u' in query:
 
                 speak("I'm having great day! I was just looking up some fun things to do")
 
@@ -216,6 +235,7 @@ def StartMainPart():
 
                 # json method of response object
                 # convert json format data into
+                # python format data
                 # python format data
                 x = response.json()
 
@@ -290,17 +310,34 @@ def StartMainPart():
                 speak('Your system is')
                 speak(bpercent.percent)
                 speak('percent charged')
+                
 
             # for shutdown
 
             elif 'shutdown' in query or 'shut down':
                 # os.system(["shutdown"," /s"])
-                os.system("shutdown /r /t 1")
+                # os.system("shutdown /s /t 1")
+                pass
 
             # for restart
 
             elif "restart" in query:
-                os.system("shutdown /r /t 0")
+                # os.system("shutdown /r /t 0")
+                pass
+            else:
+            # speak('Sorry Sir')
+            # NEW oNE ADDED 12/15/20
+            
+                webbrowser.open("https://www.google.com/search?q=" +query)
+                
+                speak('Searching for' + query)
+                time.sleep(5)
+                speak('Wait just a moment')
+                # time.sleep()
+
+                speak('Here is what i found')
+
+
 
     takeCommand()
 
@@ -553,6 +590,13 @@ def Askmebtn():
             music = os.listdir(music_dir)
             print(music)
             os.startfile(os.path.join(music_dir, music[5]))
+            
+        elif 'google' in query:
+            speak('opening google , just a moment')
+            print('www.google.com/results?search_query=' + query)
+            webbrowser.open('www.google.com/results?search_query=' + query)
+            print('Here is what i found for',query)
+
 
 
         elif 'battery' in query or 'charging' in query:
@@ -595,20 +639,21 @@ def Askmebtn():
             speak(strDate)
 
 
-        elif 'open google' in query:
-            speak('opening google,just a moment')
-            webbrowser.open('www.google.com')
+        # elif 'open google' in query:
+        #     speak('opening google,just a moment')
+        #     webbrowser.open('www.google.com')
 
-        elif 'open youtube' in query:
-            speak('opening youtube,just a moment')
-            webbrowser.open('www.youtube.com')
-
-        ### NEW ONE ADDED WORKING
-
-        elif 'on youtube' in query:
+        elif 'youtube' in query or 'on youtube' in query:
             speak('opening youtube , just a moment')
             print('www.youtube.com/results?search_query=' + query)
             webbrowser.open('www.youtube.com/results?search_query=' + query)
+
+        ### NEW ONE ADDED WORKING
+
+        # elif 'on youtube' in query:
+        #     speak('opening youtube , just a moment')
+        #     print('www.youtube.com/results?search_query=' + query)
+        #     webbrowser.open('www.youtube.com/results?search_query=' + query)
 
         
 
@@ -689,7 +734,7 @@ def Askmebtn():
 
         elif 'open interpreter' in query:
             speak('opening interpreter')
-            PythonPath = "C:\\Users\\HOME\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe"
+            PythonPath = "C:\\Users\\Lenovo\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe"
             os.startfile(PythonPath)
 
         elif 'open c drive' in query:
